@@ -1,19 +1,27 @@
 package config
 
 import (
+	"fmt"
+
 	"github.com/crgimenes/goconfig"
 )
 
 type Config struct {
-	AMQPUrl string
+	Amqp AmqpConfig
+}
+
+type AmqpConfig struct {
+	URL string
 }
 
 func LoadConfig() (config Config, err error) {
-	var c Config
+	goconfig.PrefixEnv = "WAV"
 
-	if err := goconfig.Parse(&c); err != nil {
+	if err := goconfig.Parse(&config); err != nil {
 		return config, err
 	}
 
-	return c, nil
+	fmt.Println(config)
+
+	return config, nil
 }

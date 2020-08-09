@@ -1,2 +1,2 @@
 run: ; $(info $(M)Running backend app...)
-	go run main.go
+	env `cat ./env/.env | xargs` go run .
